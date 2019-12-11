@@ -5,26 +5,30 @@ services:
     image: traefik
     container_name: traefik 
     restart: "always"
+    environment: 
+      - DO_AUTH_TOKEN=721f972b5631edd716c0e574d98097a22c09e1d53bc4ecbbba8ee1f724eed41b
     command:
       - --providers.docker=true
-      - --api.insecure=true
+      # - --api.insecure=true
       - --providers.docker.exposedbydefault=false
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.sample.acme.email=frishi@me.com
       - --certificatesResolvers.sample.acme.storage=acme.json
       - --certificatesResolvers.sample.acme.httpChallenge.entryPoint=web
+      - --certificatesresolvers.sample.acme.dnschallenge=true
+      - --certificatesresolvers.sample.acme.dnschallenge.provider=digitalocean
     labels:
       - traefik.http.routers.web.rule=Host(`localhost`)
       - traefik.http.routers.web.entrypoints=web
       - traefik.http.routers.websecure.rule=Host(`localhost`)
       - traefik.http.routers.websecure.entrypoints=websecure
-      - traefik.http.routers.websecure.tls=true
+      - traefik.http.routers.websecure.tls
       - traefik.http.routers.api.rule=Host(`traefik.docker.localhost`)
       - traefik.http.routers.api.entrypoints=websecure
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=myAuth
-      # - traefik.http.middlewares.myAuth.basicauth.users=`admin:$apr1$7EmZ/3DV$HAzUj/8s0kwszb1ExlWY9.`
+      # - traefik.http.middlewares.myAuth.basicauth.users=admin:$apr1$7EmZ/3DV$HAzUj/8s0kwszb1ExlWY9.
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
