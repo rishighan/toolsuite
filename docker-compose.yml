@@ -17,12 +17,13 @@ services:
       - --certificatesresolvers.sample.acme.dnschallenge=true
       - --certificatesresolvers.sample.acme.dnschallenge.provider=digitalocean
     labels:
-      - traefik.http.routers.web.rule=Host(`localhost`)
+      - traefik.http.routers.web.rule=Host(`services.rishighan.com`)
       - traefik.http.routers.web.entrypoints=web
-      - traefik.http.routers.websecure.rule=Host(`localhost`)
+      - traefik.http.routers.websecure.rule=Host(`services.rishighan.com`)
       - traefik.http.routers.websecure.entrypoints=websecure
       - traefik.http.routers.websecure.tls
       - traefik.http.routers.api.rule=Host(`traefik.docker.localhost`)
+      - traefik.http.routers.api.tls.certresolver=sample
       - traefik.http.routers.api.entrypoints=websecure
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=myAuth
