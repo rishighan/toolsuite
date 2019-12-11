@@ -6,10 +6,25 @@ services:
     container_name: traefik 
     restart: "always"
     command:
-      - --entrypoints.web.address=:80
       - --providers.docker=true
-      # - --api.insecure=true
+      - --api.insecure=true
       - --providers.docker.exposedbydefault=false
+      - --entryPoints.web.address=:80
+      - --entryPoints.websecure.address=:443
+      - --certificatesResolvers.sample.acme.email=frishi@me.com
+      - --certificatesResolvers.sample.acme.storage=acme.json
+      - --certificatesResolvers.sample.acme.httpChallenge.entryPoint=web
+    labels:
+      - traefik.http.routers.web.rule=Host(`localhost`)
+      - traefik.http.routers.web.entrypoints=web
+      - traefik.http.routers.websecure.rule=Host(`localhost`)
+      - traefik.http.routers.websecure.entrypoints=websecure
+      - traefik.http.routers.websecure.tls=true
+      - traefik.http.routers.api.rule=Host(`traefik.docker.localhost`)
+      - traefik.http.routers.api.entrypoints=websecure
+      - traefik.http.routers.api.service=api@internal
+      - traefik.http.routers.api.middlewares=myAuth
+      # - traefik.http.middlewares.myAuth.basicauth.users=`admin:$apr1$7EmZ/3DV$HAzUj/8s0kwszb1ExlWY9.`
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
@@ -19,7 +34,7 @@ services:
       - "8080:8080"
     volumes:
       # Here is the mount of the traefik config
-      - ./traefik.toml:/etc/traefik/traefik.toml:ro
+      # - ./traefik.toml:/etc/traefik/traefik.toml:ro
       - ./acme.json:/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
