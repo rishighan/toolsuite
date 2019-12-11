@@ -25,6 +25,7 @@ services:
       - traefik.http.routers.websecure.entrypoints=websecure
       - traefik.http.routers.websecure.tls
       - traefik.http.routers.api.rule=Host(`traefik.docker.localhost`)
+      - traefik.http.routers.api.tls.certresolver=sample
       - traefik.http.routers.api.entrypoints=websecure
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=myAuth
