@@ -59,6 +59,9 @@ fi
     printf "\n$SCISSORS  Pruning Docker images, networks and volumes...\n\n"
     docker system prune -f
 
+    printf "\n$CONSTRUCTION Creating an external docker network...\n\n"
+    docker network create gateway
+    
     printf "$DOWNLOAD Downloading the docker-compose configuration for $service_name...\n\n"
     printf "$repository_base_url\n\n"
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
