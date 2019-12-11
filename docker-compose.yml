@@ -5,8 +5,6 @@ services:
     image: traefik
     container_name: traefik 
     restart: "always"
-    environment: 
-      - DO_AUTH_TOKEN=721f972b5631edd716c0e574d98097a22c09e1d53bc4ecbbba8ee1f724eed41b
     command:
       - --providers.docker=true
       # - --api.insecure=true
@@ -25,7 +23,6 @@ services:
       - traefik.http.routers.websecure.entrypoints=websecure
       - traefik.http.routers.websecure.tls
       - traefik.http.routers.api.rule=Host(`traefik.docker.localhost`)
-      - traefik.http.routers.api.tls.certresolver=sample
       - traefik.http.routers.api.entrypoints=websecure
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=myAuth
