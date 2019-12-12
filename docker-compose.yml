@@ -14,7 +14,6 @@ services:
       - --certificatesresolvers.do.acme.tlschallenge=true
       - --certificatesResolvers.do.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
       - --certificatesResolvers.do.acme.dnsChallenge.provider=digitalocean 
-    labels:
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
