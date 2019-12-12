@@ -13,8 +13,10 @@ services:
       - --certificatesresolvers.le.acme.email=frishi@me.com
       - --certificatesresolvers.le.acme.storage=/acme.json
       - --certificatesresolvers.le.acme.httpchallenge=true
-      - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
-      # - --certificatesResolvers.do.acme.dnsChallenge.provider=digitalocean 
+      - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
+      # - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --certificatesResolvers.le.acme.httpChallenge.provider=letsencrypt
+
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
