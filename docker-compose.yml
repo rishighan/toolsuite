@@ -10,11 +10,11 @@ services:
       - --api.dashboard=true
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
-      - --certificatesresolvers.do.acme.email=frishi@me.com
-      - --certificatesresolvers.do.acme.storage=/acme.json
-      # - --certificatesresolvers.do.acme.tlschallenge=true
-      # - --certificatesResolvers.do.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
-      - --certificatesResolvers.do.acme.dnsChallenge.provider=digitalocean 
+      - --certificatesresolvers.le.acme.email=frishi@me.com
+      - --certificatesresolvers.le.acme.storage=/acme.json
+      - --certificatesresolvers.le.acme.httpchallenge=true
+      - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
+      # - --certificatesResolvers.do.acme.dnsChallenge.provider=digitalocean 
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
