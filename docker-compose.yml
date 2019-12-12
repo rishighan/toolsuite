@@ -11,8 +11,8 @@ services:
       - --entryPoints.websecure.address=:443
       - --certificatesresolvers.do.acme.email=frishi@me.com
       - --certificatesresolvers.do.acme.storage=/acme.json
-      - --certificatesresolvers.do.acme.tlschallenge=true
-      - --certificatesResolvers.do.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
+      # - --certificatesresolvers.do.acme.tlschallenge=true
+      # - --certificatesResolvers.do.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
       - --certificatesResolvers.do.acme.dnsChallenge.provider=digitalocean 
     ports:
       # Port 443 is used for HTTP trafic
@@ -22,7 +22,7 @@ services:
       # Port 8080 is used for traefik's own dashboard
       - "8080:8080"
     volumes:
-      - ./acme.json:/acme.json
+      - ./acme.json:/certstore/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
