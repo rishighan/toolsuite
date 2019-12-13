@@ -13,8 +13,7 @@ services:
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=frishi@me.com
       - --certificatesResolvers.le.acme.storage=/acme.json
-      # - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
-      - --certificatesresolvers.le.acme.httpChallenge.provider=letsencrypt
+      - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
     labels:
       - traefik.enable=true
       - traefik.http.routers.api.rule=Host(`services.rishighan.com`) && PathPrefix(`/api`) || PathPrefix(`/dashboard`)
@@ -34,7 +33,7 @@ services:
       # Port 8080 is used for traefik's own dashboard
       - "8080:8080"
     volumes:
-      - /Users/hghan/work/toolsuite/acme.json:/acme.json
+      - /Users/hghan/work/toolsuite/acme.json:/certs/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
