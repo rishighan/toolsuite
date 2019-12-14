@@ -26,15 +26,15 @@ services:
       - traefik.http.routers.api.middlewares=dashboard-auth@docker
       
       # global redirect to https
-      - traefik.http.routers.http-catchall.rule=hostregexp(`{`rishighan.com`, `{subdomain:[a-z]+}.rishighan.com`}`)
-      - traefik.http.routers.http-catchall.entrypoints=web
-      - traefik.http.routers.http-catchall.middlewares=redirect-to-https
+      # - traefik.http.routers.http-catchall.rule=hostregexp(`{`rishighan.com`, `{subdomain:[a-z]+}.rishighan.com`}`)
+      # - traefik.http.routers.http-catchall.entrypoints=web
+      # - traefik.http.routers.http-catchall.middlewares=redirect-to-https
 
       # HTTP -> HTTPS redirect
-      - traefik.http.middlewares.https_redirect.redirectscheme.scheme=https
+      # - traefik.http.middlewares.https_redirect.redirectscheme.scheme=https
       
       # Middleware redirect
-      - traefik.http.routers.api.middlewares=https_redirect
+      # - traefik.http.routers.api.middlewares=https_redirect
 
       # TLS
       - traefik.http.routers.api.tls=true
