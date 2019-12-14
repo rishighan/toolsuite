@@ -34,7 +34,7 @@ services:
       # Port 8080 is used for traefik's own dashboard
       - "8080:8080"
     volumes:
-      - /Users/hghan/work/toolsuite/acme.json:/certs/acme.json
+      - /Users/rishi/work/toolsuite/acme.json:/certs/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
