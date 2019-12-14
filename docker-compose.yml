@@ -6,8 +6,8 @@ services:
     container_name: traefik 
     restart: "always"
     command:
-      - --providers.docker=true
-      - --api.dashboard=true
+      - --providers.docker
+      - --api
       - --entryPoints.web.address=:80
       - --entryPoints.api.address=:8080
       - --entryPoints.websecure.address=:443
@@ -26,7 +26,7 @@ services:
       - traefik.http.routers.api.middlewares=dashboard-auth@docker
       
       # global redirect to https
-      - traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)
+      - traefik.http.routers.http-catchall.rule=hostregexp(`{`rishighan.com`, `{subdomain:[a-z]+}.rishighan.com`}`)
       - traefik.http.routers.http-catchall.entrypoints=web
       - traefik.http.routers.http-catchall.middlewares=redirect-to-https
 
@@ -45,8 +45,6 @@ services:
       - "80:80"
       # Port 443 is used for HTTPS trafic
       - "443:443"
-      # Port 8080 is used for traefik's own dashboard
-      - "8080:8080"
     volumes:
       - /Users/rishi/work/toolsuite/acme.json:/certs/acme.json
       # The docker socket is mounted for auto-discovery of new services
