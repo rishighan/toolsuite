@@ -21,8 +21,8 @@ services:
       - traefik.http.middlewares.dashboard-auth.basicauth.users=admin:$$apr1$$a3JDTsiG$$gKP8F0OW8vROqOiq3RreP0
       - traefik.http.routers.api.middlewares=dashboard-auth@docker
       - traefik.http.services.api.loadbalancer.server.port=8080
-      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.api.middlewares=https_redirect"
+      - traefik.http.middlewares.https_redirect.redirectscheme.scheme=https
+      - traefik.http.routers.api.middlewares=https_redirect
       - traefik.http.routers.api.tls=true
       - traefik.http.routers.api.tls.certresolver=le
 
