@@ -14,6 +14,7 @@ services:
       - --certificatesResolvers.le.acme.email=frishi@me.com
       - --certificatesResolvers.le.acme.storage=/acme.json
       - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
+      - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
     labels:
       - traefik.enable=true
       - traefik.http.routers.api.rule=Host(`services.rishighan.com`) && PathPrefix(`/api`) || PathPrefix(`/dashboard`)
