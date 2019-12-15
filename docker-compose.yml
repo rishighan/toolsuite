@@ -47,7 +47,7 @@ services:
       # Port 443 is used for HTTPS trafic
       - "443:443"
     volumes:
-      - /usr/local/share/certs/acme.json:/acme.json
+      - /usr/local/share/certs/acme.json:/usr/local/share/ca-certificates/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
