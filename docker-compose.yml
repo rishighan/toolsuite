@@ -27,7 +27,7 @@ services:
       - traefik.http.routers.api.middlewares=dashboard-auth@docker
       
       # global redirect to https
-      - traefik.http.routers.api.rule=hostregexp(`{`rishighan.com`, `{subdomain:[a-z]+}.rishighan.com`}`)
+      - traefik.http.routers.api.rule=HostRegexp(`rishighan.com`, `{subdomain:[a-z]+}.rishighan.com`)
       - traefik.http.routers.api.middlewares=redirect-to-https
 
       # HTTP -> HTTPS redirect
