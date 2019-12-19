@@ -7,46 +7,32 @@ services:
     restart: "always"
     command:
       - --providers.docker
-      - --api
+      - --api=true
+      - --api.insecure=true
+      # TLS configuration
       - --entryPoints.web.address=:80
-      - --entryPoints.api.address=:8080
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=frishi@me.com
-      - --certificatesResolvers.le.acme.storage=/acme.json
+      - --certificatesResolvers.le.acme.storage=acme.json
+      # used during the challenge
       - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
-      # - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
+      # LE staging
+      - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.api.rule=Host(`services.rishighan.com`) && PathPrefix(`/dashboard`)
-      - traefik.http.routers.api.service=api@internal
-      - traefik.http.routers.api.entrypoints=websecure
-      - traefik.http.services.api.loadbalancer.server.port=8080
-
-      # Dashboard auth
-      - traefik.http.middlewares.dashboard-auth.basicauth.users=admin:$$apr1$$a3JDTsiG$$gKP8F0OW8vROqOiq3RreP0
-      - traefik.http.routers.api.middlewares=dashboard-auth@docker
-      
-      # global redirect to https
-      # - traefik.http.routers.api.rule=HostRegexp(`rishighan.com`, `{subdomain:[a-z]+}.rishighan.com`)
-      # - traefik.http.routers.api.middlewares=redirect-to-https
-
-      # HTTP -> HTTPS redirect
-      # - traefik.http.middlewares.https_redirect.redirectscheme.scheme=https
-      
-      # Middleware redirect
-      # - traefik.http.routers.api.middlewares=https_redirect
-
-      # TLS
-      - traefik.http.routers.api.tls=true
-      - traefik.http.routers.api.tls.certresolver=le
-
+      - traefik.http.routers.dashboard.rule=Host(`services.rishighan.com`) && PathPrefix(`/dashboard/`)
+      - traefik.http.routers.dashboard.tls=true
+      - traefik.http.routers.dashboard.tls.certresolver=le
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
       # Port 443 is used for HTTPS trafic
       - "443:443"
+      - "8080:8080"
     volumes:
-      - /usr/local/share/certs/acme.json:/usr/local/share/ca-certificates/acme.json
+      # production
+      # - /usr/local/share/certs/acme.json:/usr/local/share/ca-certificates/acme.json
+      # development-only
+      - /usr/local/var/certs/acme.json:/usr/local/share/ca-certificates/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
