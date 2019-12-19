@@ -19,7 +19,7 @@ services:
       - --certificatesresolvers.le.acme.httpchallenge=true
       - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
       # LE staging
-      - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
+      # - --certificatesResolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
     labels:
       - traefik.http.routers.api.rule=Host(`services.rishighan.com`) && PathPrefix(`/dashboard/`)
       - traefik.http.routers.api.tls=true
