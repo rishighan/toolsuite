@@ -14,7 +14,7 @@ services:
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=frishi@me.com
-      - --certificatesResolvers.le.acme.storage=/acme/acme.json
+      - --certificatesResolvers.le.acme.storage=/acme.json
       # used during the challenge
       - --certificatesresolvers.le.acme.httpchallenge=true
       - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
