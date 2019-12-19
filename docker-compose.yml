@@ -14,7 +14,7 @@ services:
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=frishi@me.com
-      - --certificatesResolvers.le.acme.storage=/acme.json
+      - --certificatesResolvers.le.acme.storage=/acme/acme.json
       # used during the challenge
       - --certificatesresolvers.le.acme.httpchallenge=true
       - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
@@ -32,7 +32,7 @@ services:
       - "8080:8080"
     volumes:
       # production
-      - /usr/local/var/certs/:/
+      - /usr/local/var/certs/:/acme
       # development-only
       # - /usr/local/var/certs/acme.json:/usr/local/share/ca-certificates/acme.json
       # The docker socket is mounted for auto-discovery of new services
