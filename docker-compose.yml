@@ -32,7 +32,7 @@ services:
       - "8080:8080"
     volumes:
       # production
-      - /usr/local/var/certs/:/acme/
+      - /usr/local/var/certs/acme.json:/acme/acme.json
       # development-only
       # - /usr/local/var/certs/acme.json:/usr/local/share/ca-certificates/acme.json
       # The docker socket is mounted for auto-discovery of new services
