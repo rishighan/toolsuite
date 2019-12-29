@@ -38,7 +38,7 @@ services:
       - "8080:8080"
     volumes:
       # production
-      - ./letsencrypt/acme.json:/acme.json
+      - /root/letsencrypt/acme.json:/acme.json
       # The docker socket is mounted for auto-discovery of new services
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
