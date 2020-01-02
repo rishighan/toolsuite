@@ -8,40 +8,15 @@ services:
     security_opt:
       - no-new-privileges:true
     command:
-      - "--api=true"
+      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--metrics.prometheus=true"
-      - "--accesslog=true"
-      - "--accesslog.filepath=/opt/traefik/access.log"
-      - "--global.sendAnonymousUsage=true"
-      - "--entryPoints.http.address=:80"
-      - "--entryPoints.https.address=:443"
-      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge=true"
-      - "--certificatesResolvers.mytlschallenge.acme.httpChallenge.entryPoint=http"
-      - "--certificatesresolvers.mytlschallenge.acme.email=frishi@me.com"
-      - "--certificatesresolvers.mytlschallenge.acme.storage=/opt/traefik/acme.json"
+      - "--entrypoints.web.address=:80"
     labels:
       # Dashboard
       - "traefik.http.routers.dashboard.rule=Host(`services.rishighan.com`)"
-      - "traefik.http.routers.dashboard.entrypoints=https"
       - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.tls.certresolver=mytlschallenge"
-      - "traefik.http.routers.dashboard.middlewares=https-auth"
 
-      # global redirect HTTPS
-      - "traefik.http.routers.http-catchall.rule=HostRegexp(`{any:.+}`)"
-      - "traefik.http.routers.http-catchall.entrypoints=http"
-      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https@docker"
-
-      # middleware: Redirect HTTP->HTTPS
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
-      
-      # middleware: Basic Auth
-      # - "traefik.http.middlewares.https-auth.basicauth.users=admin:$$apr1$$xxxxxxxxxxxxxxx"
-    # environment: 
-      # - "DO_AUTH_TOKEN=721f972b5631edd716c0e574d98097a22c09e1d53bc4ecbbba8ee1f724eed41b"
     ports:
       # Port 443 is used for HTTP trafic
       - "80:80"
