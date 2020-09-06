@@ -5,8 +5,6 @@ services:
     image: traefik:v2.2
     container_name: traefik 
     restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
     command:
       - "--api=true"
       - "--api.dashboard=true"
@@ -25,7 +23,6 @@ services:
       - "80:80"
       # Port 443 is used for HTTPS trafic
       - "443:443"
-      - "8080:8080"
     volumes:
       # production
       - /opt/traefik/:/opt/traefik/
