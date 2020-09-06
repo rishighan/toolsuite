@@ -9,6 +9,7 @@ services:
       - no-new-privileges:true
     command:
       - "--api=true"
+      - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
