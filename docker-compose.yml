@@ -14,7 +14,7 @@ services:
       - "--entrypoints.web.address=:80"
     labels:
       # Dashboard
-      - "traefik.http.routers.api.rule=Host(`services.rishighan.com`)"
+      - "traefik.http.routers.api.rule=Host(`services.rishighan.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - 'traefik.http.routers.api.entrypoints=web'
       - "traefik.http.routers.api.service=api@internal"
       - "traefik.http.routers.api.middlewares=auth"
