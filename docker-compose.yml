@@ -8,13 +8,14 @@ services:
     security_opt:
       - no-new-privileges:true
     command:
-      - "--api.insecure=true"
+      # - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
     labels:
       # Dashboard
-      - "traefik.http.middlewares.test-auth.basicauth.users=frishi:$$apr1$$oGNy.xU2$$2C97eMH1JEej75Xx7bl4U1"
+      - "traefik.http.routers.api.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=frishi:$$apr1$$oGNy.xU2$$2C97eMH1JEej75Xx7bl4U1"
       - "traefik.http.routers.dashboard.rule=Host(`services.rishighan.com`)"
       - "traefik.http.routers.dashboard.service=api@internal"
 
