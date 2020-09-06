@@ -21,7 +21,7 @@ services:
 
     ports:
       # Port 443 is used for HTTP trafic
-      - "80:80"
+      # - "80:80"
       # Port 443 is used for HTTPS trafic
       - "443:443"
       - "8080:8080"
