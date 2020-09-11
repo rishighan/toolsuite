@@ -70,6 +70,7 @@ fi
     curl "$repository_base_url"/docker-compose.env --output docker-compose.env
 
     printf "Writing Zookeeper configuration to docker-compose.env... \n"
+    echo -e "\n" >> docker-compose.env
     echo -e "ZOOKEEPER_CLIENT_USER=$zookeeper_client_user" >> docker-compose.env
     echo -e "ZOOKEEPER_CLIENT_PASSWORD=$zookeeper_client_password" >> docker-compose.env
 
