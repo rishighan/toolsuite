@@ -3,7 +3,7 @@ version: "3.3"
 services:
   traefik:
     image: traefik:v2.2
-    container_name: traefik 
+    container_name: traefik
     restart: unless-stopped
     command:
       - "--api.dashboard=true"
@@ -54,8 +54,7 @@ services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     container_name: zookeeper
-    environment: 
-      ALLOW_ANONYMOUS_LOGIN: 'yes'
+    env_file: docker-compose.env
     labels:
       - traefik.enable=false
     ports:

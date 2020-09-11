@@ -28,12 +28,14 @@ service_name=''
 hostname=''
 username=''
 
-while getopts 'd:s:h:u:r:' flag; do
+while getopts 'd:s:h:u:r:x:p:' flag; do
     case "${flag}" in
         s) service_name="${OPTARG}" ;;
         h) hostname="${OPTARG}" ;;
         u) username="${OPTARG}" ;;
         r) repository_base_url="${OPTARG}" ;;
+        x) zookeeper_client_user="${OPTARG}" ;;
+        p) zookeeper_client_password="${OPTARG}" ;;
         *) printf "Usage..."
            exit 1 ;;
     esac
@@ -65,7 +67,13 @@ fi
     printf "$DOWNLOAD Downloading the docker-compose configuration for $service_name...\n\n"
     printf "$repository_base_url\n\n"
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
-    
+    curl "$repository_base_url"/docker-compose.env --output docker-compose.env
+
+    printf "Writing Zookeeper configuration to docker-compose.env... \n"
+    echo -e "\n" >> docker-compose.env
+    echo -e "ZOOKEEPER_CLIENT_USER=$zookeeper_client_user" >> docker-compose.env
+    echo -e "ZOOKEEPER_CLIENT_PASSWORD=$zookeeper_client_password" >> docker-compose.env
+
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
     docker-compose down -v
     
