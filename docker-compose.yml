@@ -3,7 +3,7 @@ version: "3.3"
 services:
   traefik:
     image: traefik:v2.2
-    container_name: traefik 
+    container_name: traefik
     restart: unless-stopped
     command:
       - "--api.dashboard=true"
@@ -16,6 +16,7 @@ services:
       
       # Dashboard
       - "traefik.http.routers.dashboard.rule=Host(`services.rishighan.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      # - traefik.http.routers.posts-api.rule=Host(`localhost`) && PathPrefix(`/dashboard/`)
       - "traefik.http.routers.dashboard.service=api@internal"
 
     ports:
@@ -44,8 +45,7 @@ services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     container_name: zookeeper
-    environment: 
-      ALLOW_ANONYMOUS_LOGIN: 'yes'
+    env_file: docker-compose.env
     labels:
       - traefik.enable=false
     ports:

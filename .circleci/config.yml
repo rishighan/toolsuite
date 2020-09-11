@@ -36,5 +36,7 @@ jobs:
             bash ./scripts/deploy/deploy.sh -u $DIGITALOCEAN_USERNAME \
                                             -h $DIGITALOCEAN_HOST \
                                             -s $SERVICE_NAME \
-                                            -r $REPOSITORY_BASE_URL 
+                                            -r $REPOSITORY_BASE_URL \
+                                            -x $ZOOKEEPER_CLIENT_USER \
+                                            -p $ZOOKEEPER_CLIENT_PASSWORD 
       
