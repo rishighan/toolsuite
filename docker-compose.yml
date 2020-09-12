@@ -12,6 +12,7 @@ services:
       - default
     volumes:
       - "./Caddyfile:/etc/caddy/Caddyfile"
+      - $HOME/.caddy:/etc/caddycerts
     
   nats:
     image: nats
