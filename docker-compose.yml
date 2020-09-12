@@ -1,44 +1,21 @@
 version: "3.3"
 
 services:
-  traefik:
-    image: traefik:v2.2
-    container_name: traefik
-    restart: unless-stopped
-    command:
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-    labels:
-      - "traefik.enable=enable"
-      
-      # Dashboard
-      - "traefik.http.routers.dashboard.rule=Host(`services.rishighan.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
-      # - traefik.http.routers.posts-api.rule=Host(`localhost`) && PathPrefix(`/dashboard/`)
-      - "traefik.http.routers.dashboard.service=api@internal"
-
+  caddy:
+    image: caddy
+    container_name: caddy
+    restart: always
     ports:
-      # Port 443 is used for HTTP trafic
-      - "80:80"
-      # Port 443 is used for HTTPS trafic
       - "443:443"
-      - "8080:8080"
-    volumes:
-      # production
-      - /opt/traefik/:/opt/traefik/
-      # The docker socket is mounted for auto-discovery of new services
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - "80:80"
     networks:
-      # Attach the traefik container to the default network (which is the global "gateway" network)
       - default
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"
     
   nats:
     image: nats
     container_name: nats
-    labels:
-      - traefik.enable=false
     networks:
       - default
 
@@ -46,8 +23,6 @@ services:
     image: 'bitnami/zookeeper:latest'
     container_name: zookeeper
     env_file: docker-compose.env
-    labels:
-      - traefik.enable=false
     ports:
       - '2181:2181'
     volumes:

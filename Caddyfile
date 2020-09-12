@@ -1,0 +1,10 @@
+{
+    # Global options block. Entirely optional, https is on by default
+    # Optional email key for lets encrypt
+    email frishi@me.com 
+    # Optional staging lets encrypt for testing. Comment out for production.
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+posts.services.rishighan.com {
+    reverse_proxy posts-api:5000
+}
