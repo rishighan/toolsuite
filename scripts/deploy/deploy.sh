@@ -68,6 +68,7 @@ fi
     printf "$repository_base_url\n\n"
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
     curl "$repository_base_url"/docker-compose.env --output docker-compose.env
+    curl "$repository_base_url"/Caddyfile --output Caddyfile
 
     printf "Writing Zookeeper configuration to docker-compose.env... \n"
     echo -e "\n" >> docker-compose.env
