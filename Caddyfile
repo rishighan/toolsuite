@@ -2,7 +2,7 @@
     # Global options block. Entirely optional, https is on by default
     email frishi@me.com 
     acme_ca https://acme.zerossl.com/v2/DV90
-    cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
+    # cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
 }
 posts.services.rishighan.com {
     reverse_proxy posts-api:5000
