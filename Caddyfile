@@ -1,6 +1,7 @@
 {
     # Global options block. Entirely optional, https is on by default
 }
+
 posts.services.rishighan.com {
     reverse_proxy posts-api:5000
 }
