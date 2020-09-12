@@ -2,11 +2,7 @@
     # Global options block. Entirely optional, https is on by default
     email frishi@me.com 
     acme_ca https://acme.zerossl.com/v2/DV90
-    acme_eab {
-        key_id  E8YyC9TIKGfsJGe78GegDw
-        hmac 9O4jIrE7evT3zPlqGSkekXOTqVsB74yvXT6AFNDLSPaa5a4DqnD-gpXEciZEz70Gpl3j5Nm14P3AZ4od-cDVSA  
-    }
-    # cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
+    cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
 }
 posts.services.rishighan.com {
     reverse_proxy posts-api:5000
