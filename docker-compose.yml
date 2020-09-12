@@ -1,19 +1,6 @@
 version: "3.3"
 
 services:
-  caddy:
-    image: caddy
-    container_name: caddy
-    restart: always
-    ports:
-      - "443:443"
-      - "80:80"
-    networks:
-      - default
-    volumes:
-      - "./Caddyfile:/etc/caddy/Caddyfile"
-      - $HOME/.caddy:/etc/caddycerts
-    
   nats:
     image: nats
     container_name: nats
@@ -36,5 +23,3 @@ networks:
   default:
     external: 
       name: gateway
-volumes:
-  letsencrypt:
