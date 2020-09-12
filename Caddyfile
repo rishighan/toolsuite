@@ -6,7 +6,6 @@
         key_id UF85mazsOD8S6E3eTxVa9w 
         hmac t2CKRgVAPzUfJmWFfHwXP28j3v8fJgcd4AEPw8qHMnstEbktIdYbVWIDqn_UfYKmW65J1xmP609Uo6nW5X6oQg
     }
-    
 }
 posts.services.rishighan.com {
     reverse_proxy posts-api:5000
