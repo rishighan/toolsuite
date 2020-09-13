@@ -5,7 +5,7 @@ services:
     image: nats
     container_name: nats
     networks:
-      - default
+      - main-network 
 
   zookeeper:
     image: 'bitnami/zookeeper:latest'
@@ -16,10 +16,8 @@ services:
     volumes:
       - ../zookeeper/data:/bitnami/zookeeper
     networks:
-      - default
+      - main-network 
 
-# Make the externally created network "gateway" available as network "default"
 networks:
-  default:
-    external: 
-      name: gateway
+  main-network:
+    external: true
