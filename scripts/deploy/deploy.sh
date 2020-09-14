@@ -28,7 +28,7 @@ service_name=''
 hostname=''
 username=''
 
-while getopts 'd:s:h:u:r:x:p:' flag; do
+while getopts 'd:s:h:u:r:x:p:b:m:o:' flag; do
     case "${flag}" in
         s) service_name="${OPTARG}" ;;
         h) hostname="${OPTARG}" ;;
@@ -36,6 +36,9 @@ while getopts 'd:s:h:u:r:x:p:' flag; do
         r) repository_base_url="${OPTARG}" ;;
         x) zookeeper_client_user="${OPTARG}" ;;
         p) zookeeper_client_password="${OPTARG}" ;;
+        b) mongodb_database="${OPTARG}" ;;
+        m) mongodb_username="${OPTARG}" ;;
+        o) mongodb_password="${OPTARG}" ;;
         *) printf "Usage..."
            exit 1 ;;
     esac
@@ -62,17 +65,23 @@ fi
     docker system prune -f
 
     printf "\n$CONSTRUCTION Creating an external docker network...\n\n"
-    docker network create gateway
+    docker network create main-network
     
     printf "$DOWNLOAD Downloading the docker-compose configuration for $service_name...\n\n"
     printf "$repository_base_url\n\n"
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
     curl "$repository_base_url"/docker-compose.env --output docker-compose.env
+    curl "$repository_base_url"/Caddyfile --output Caddyfile
 
     printf "Writing Zookeeper configuration to docker-compose.env... \n"
     echo -e "\n" >> docker-compose.env
     echo -e "ZOOKEEPER_CLIENT_USER=$zookeeper_client_user" >> docker-compose.env
     echo -e "ZOOKEEPER_CLIENT_PASSWORD=$zookeeper_client_password" >> docker-compose.env
+
+    printf "Writing Mongo configuration to docker-compose.env... \n"
+    echo -e "MONGODB_DATABASE=$mongodb_database" >> docker-compose.env
+    echo -e "MONGODB_USERNAME=$mongodb_username" >> docker-compose.env
+    echo -e "MONGODB_PASSWORD=$mongodb_password" >> docker-compose.env
 
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
     docker-compose down -v
