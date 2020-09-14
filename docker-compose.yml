@@ -44,7 +44,6 @@ services:
     networks:
       - main-network
 
-# Make the externally created network "gateway" available as network "default"
 networks:
   main-network:
     external: true
