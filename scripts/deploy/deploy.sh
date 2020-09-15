@@ -28,7 +28,7 @@ service_name=''
 hostname=''
 username=''
 
-while getopts 'd:s:h:u:r:x:p:b:m:o:' flag; do
+while getopts 'd:s:h:u:r:x:p:b:o:' flag; do
     case "${flag}" in
         s) service_name="${OPTARG}" ;;
         h) hostname="${OPTARG}" ;;
@@ -37,8 +37,7 @@ while getopts 'd:s:h:u:r:x:p:b:m:o:' flag; do
         x) zookeeper_client_user="${OPTARG}" ;;
         p) zookeeper_client_password="${OPTARG}" ;;
         b) mongodb_database="${OPTARG}" ;;
-        m) mongodb_username="${OPTARG}" ;;
-        o) mongodb_password="${OPTARG}" ;;
+        o) mongodb_root_password="${OPTARG}" ;;
         *) printf "Usage..."
            exit 1 ;;
     esac
@@ -80,8 +79,7 @@ fi
 
     printf "Writing Mongo configuration to docker-compose.env... \n"
     echo -e "MONGODB_DATABASE=$mongodb_database" >> docker-compose.env
-    echo -e "MONGODB_USERNAME=$mongodb_username" >> docker-compose.env
-    echo -e "MONGODB_PASSWORD=$mongodb_password" >> docker-compose.env
+    echo -e "MONGODB_ROOT_PASSWORD=$mongodb_root_password" >> docker-compose.env
 
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
     docker-compose down -v

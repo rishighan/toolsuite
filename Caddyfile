@@ -3,8 +3,8 @@
     email frishi@me.com 
     acme_ca https://acme.zerossl.com/v2/DV90
     acme_eab {
-        key_id 76iOA7Rwh397hFpeYcvoLg 
-        hmac rKbASXmvZlBZ7iZv179h3epWKnxYGIOqk2uac74G_--QKJJGgYEDBGFjYjrdoYJKUfLkHDyZYqlSsZooqGo6CA 
+        key_id 2VwVQvszSxxk7d4b1pA_ww 
+        hmac sHdM32gLiq8oUQthbGcnippe5-4uDwtjarJOqYRFsfDvLLTVew2VF_9_fPZ3XzZ6ZA3hlqVYUiOoWSiPAbY1Wg 
     }
     # cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
 }
