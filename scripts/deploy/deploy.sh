@@ -79,7 +79,7 @@ fi
 
     printf "Writing Mongo configuration to docker-compose.env... \n"
     echo -e "MONGODB_DATABASE=$mongodb_database" >> docker-compose.env
-    echo -e "MONGODB_ROOT_PASSWORD=$mongodb_root_password" >> docker-compose.env
+    echo -e "MONGODB_PASSWORD=$mongodb_root_password" >> docker-compose.env
 
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
     docker-compose down -v
