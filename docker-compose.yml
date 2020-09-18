@@ -22,14 +22,14 @@ services:
       - $PWD/.caddy/config:/config
 
   mongo:
-    image: bitnami/mongodb
+    image: mongo 
     container_name: db
     restart: always
     env_file: docker-compose.env
     ports:
       - "27017:27017"
     volumes:
-      - /usr/local/var/mongodb/:/bitnami/mongodb
+      - /usr/local/var/mongodb/:/data/db
     networks:
       - main-network
 

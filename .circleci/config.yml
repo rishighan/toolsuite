@@ -40,6 +40,6 @@ jobs:
                                             -x $ZOOKEEPER_CLIENT_USER \
                                             -p $ZOOKEEPER_CLIENT_PASSWORD \
                                             -b $MONGODB_DATABASE \
-                                            -m $MONGODB_USERNAME \
-                                            -o $MONGODB_PASSWORD 
+                                            -m $MONGO_INITDB_ROOT_USERNAME \
+                                            -o $MONGO_INITDB_ROOT_PASSWORD 
       
