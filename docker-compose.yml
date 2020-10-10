@@ -40,7 +40,7 @@ services:
     ports:
       - '2181:2181'
     volumes:
-      - ../zookeeper/data:/bitnami/zookeeper
+      - ../zookeeper/data/data:/bitnami/zookeeper
     networks:
       - main-network
 
