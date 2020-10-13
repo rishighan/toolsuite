@@ -1,6 +1,6 @@
 {
-    # Global options block. Entirely optional, https is on by default
-    cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
+	acme_ca https://acme.zerossl.com/v2/DV90
+    	email frishi@me.com 
 }
 
 rishighan.com {
