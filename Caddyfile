@@ -1,6 +1,8 @@
 {
-	acme_ca https://acme.zerossl.com/v2/DV90
-    	email frishi@me.com 
+	acme_eab {
+		key_id -FPopLayWseRTYGk1sTbuA
+		mac_key uIPSbLCN3rGozhuTOlexJeUEisg6R1sACaeizavNfrv8taOylgby5X9w4LfgWRqh8tNYsyt9g7G6rYvnsZ1Jxw
+	}
 }
 
 rishighan.com {
